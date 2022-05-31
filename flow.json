@@ -2326,9 +2326,7 @@
         "x": 640,
         "y": 460,
         "wires": [
-            [
-                "c411a8b0c7627ae1"
-            ]
+            []
         ]
     },
     {
@@ -2370,8 +2368,8 @@
         "type": "influxdb out",
         "z": "e3edd6748fb7dc22",
         "influxdb": "9c5b7a629d727c44",
-        "name": "InfluxDB Water Intake",
-        "measurement": "water-intake",
+        "name": "Database PLN 1",
+        "measurement": "power-meter-pln-1",
         "precision": "",
         "retentionPolicy": "",
         "database": "database",
@@ -2379,8 +2377,8 @@
         "retentionPolicyV18Flux": "",
         "org": "jmu-water-intake-cisadane",
         "bucket": "water-intake-bucket",
-        "x": 640,
-        "y": 560,
+        "x": 740,
+        "y": 140,
         "wires": []
     },
     {
@@ -2395,7 +2393,7 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 670,
+        "x": 730,
         "y": 100,
         "wires": []
     },
@@ -2438,7 +2436,8 @@
         "wires": [
             [
                 "fcf65f134901b33c",
-                "5c9153fda05a47f9"
+                "5c9153fda05a47f9",
+                "99827490cc686e2c"
             ]
         ]
     },
@@ -2453,7 +2452,8 @@
         "wires": [
             [
                 "5c9153fda05a47f9",
-                "f51cecfcb8c71220"
+                "f51cecfcb8c71220",
+                "1d8d9f5fb4f3cfba"
             ]
         ]
     },
@@ -2468,7 +2468,8 @@
         "wires": [
             [
                 "5c9153fda05a47f9",
-                "0973cc88fad3502a"
+                "0973cc88fad3502a",
+                "f2b217265f2c8660"
             ]
         ]
     },
@@ -2483,7 +2484,8 @@
         "wires": [
             [
                 "5c9153fda05a47f9",
-                "d2bf01c0252f47eb"
+                "d2bf01c0252f47eb",
+                "3489986f88548028"
             ]
         ]
     },
@@ -2501,12 +2503,12 @@
         "useIOForPayload": false,
         "emptyMsgOnFail": false,
         "keepMsgProperties": true,
-        "x": 410,
+        "x": 490,
         "y": 360,
         "wires": [
             [],
             [
-                "c411a8b0c7627ae1"
+                "6d0e372048fd7db6"
             ]
         ]
     },
@@ -2514,14 +2516,14 @@
         "id": "b03fa10292d251df",
         "type": "function",
         "z": "e3edd6748fb7dc22",
-        "name": "",
+        "name": "Get Motor Status",
         "func": "msg.payload = {\n    value: msg.payload,\n    'fc': 2,\n    'unitid': 1,\n    'address': 192,\n    'quantity': 4\n};\nreturn msg",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 220,
+        "x": 290,
         "y": 360,
         "wires": [
             [
@@ -2540,7 +2542,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 220,
+        "x": 240,
         "y": 420,
         "wires": [
             [
@@ -2567,8 +2569,7 @@
         "wires": [
             [],
             [
-                "b4267483ad5449c5",
-                "c411a8b0c7627ae1"
+                "b4267483ad5449c5"
             ]
         ]
     },
@@ -2577,7 +2578,7 @@
         "type": "debug",
         "z": "e3edd6748fb7dc22",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -2585,7 +2586,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 750,
+        "x": 850,
         "y": 360,
         "wires": []
     },
@@ -2603,14 +2604,13 @@
                 "vt": "str"
             }
         ],
-        "repeat": "",
+        "repeat": "1",
         "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
+        "once": true,
+        "onceDelay": "1",
         "topic": "",
-        "payload": "",
         "payloadType": "date",
-        "x": 80,
+        "x": 110,
         "y": 360,
         "wires": [
             [
@@ -2640,13 +2640,103 @@
         "ioFile": "",
         "useIOForPayload": false,
         "emptyMsgOnFail": true,
-        "x": 360,
-        "y": 520,
+        "x": 430,
+        "y": 540,
         "wires": [
             [],
+            []
+        ]
+    },
+    {
+        "id": "99827490cc686e2c",
+        "type": "influxdb out",
+        "z": "e3edd6748fb7dc22",
+        "influxdb": "9c5b7a629d727c44",
+        "name": "Database PLN 2",
+        "measurement": "power-meter-pln-2",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "jmu-water-intake-cisadane",
+        "bucket": "water-intake-bucket",
+        "x": 740,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "f2b217265f2c8660",
+        "type": "influxdb out",
+        "z": "e3edd6748fb7dc22",
+        "influxdb": "9c5b7a629d727c44",
+        "name": "Database Genset 1",
+        "measurement": "power-meter-genset-1",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "jmu-water-intake-cisadane",
+        "bucket": "water-intake-bucket",
+        "x": 750,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "3489986f88548028",
+        "type": "influxdb out",
+        "z": "e3edd6748fb7dc22",
+        "influxdb": "9c5b7a629d727c44",
+        "name": "Database Genset 2",
+        "measurement": "power-meter-genset-2",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "jmu-water-intake-cisadane",
+        "bucket": "water-intake-bucket",
+        "x": 750,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "6d0e372048fd7db6",
+        "type": "function",
+        "z": "e3edd6748fb7dc22",
+        "name": "",
+        "func": "const status = msg.payload.data;\n\nmsg.payload = {\n    \"em1_status\": status[0] ? 1 : 0,\n    \"em2_status\": status[1] ? 1 : 0,\n    \"em3_status\": status[2] ? 1 : 0,\n    \"em4_status\": status[3] ? 1 : 0,\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 360,
+        "wires": [
             [
-                "c411a8b0c7627ae1"
+                "c411a8b0c7627ae1",
+                "b5f41105b0305fb4"
             ]
         ]
+    },
+    {
+        "id": "b5f41105b0305fb4",
+        "type": "influxdb out",
+        "z": "e3edd6748fb7dc22",
+        "influxdb": "9c5b7a629d727c44",
+        "name": "Database EM Status",
+        "measurement": "em-status",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "jmu-water-intake-cisadane",
+        "bucket": "water-intake-bucket",
+        "x": 880,
+        "y": 400,
+        "wires": []
     }
 ]
