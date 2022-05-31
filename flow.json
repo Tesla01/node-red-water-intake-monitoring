@@ -190,11 +190,11 @@
         "serialParity": "none",
         "serialConnectionDelay": "100",
         "serialAsciiResponseStartDelimiter": "0x3A",
-        "unit_id": 1,
-        "commandDelay": 1,
-        "clientTimeout": 1000,
+        "unit_id": "1",
+        "commandDelay": "1",
+        "clientTimeout": "1000",
         "reconnectOnTimeout": true,
-        "reconnectTimeout": 2000,
+        "reconnectTimeout": "2000",
         "parallelUnitIdsAllowed": true
     },
     {
@@ -350,6 +350,32 @@
         "commandDelay": "1",
         "clientTimeout": "1000",
         "reconnectOnTimeout": false,
+        "reconnectTimeout": "2000",
+        "parallelUnitIdsAllowed": true
+    },
+    {
+        "id": "28a831cffeb3d456",
+        "type": "modbus-client",
+        "name": "M-System Test",
+        "clienttype": "tcp",
+        "bufferCommands": true,
+        "stateLogEnabled": false,
+        "queueLogEnabled": false,
+        "tcpHost": "192.168.0.5",
+        "tcpPort": "502",
+        "tcpType": "DEFAULT",
+        "serialPort": "/dev/ttyUSB",
+        "serialType": "RTU-BUFFERD",
+        "serialBaudrate": "9600",
+        "serialDatabits": "8",
+        "serialStopbits": "1",
+        "serialParity": "none",
+        "serialConnectionDelay": "100",
+        "serialAsciiResponseStartDelimiter": "0x3A",
+        "unit_id": "1",
+        "commandDelay": "1",
+        "clientTimeout": "1000",
+        "reconnectOnTimeout": true,
         "reconnectTimeout": "2000",
         "parallelUnitIdsAllowed": true
     },
@@ -2270,42 +2296,11 @@
         ]
     },
     {
-        "id": "9bea39a4cc5b17d3",
-        "type": "modbus-read",
-        "z": "e3edd6748fb7dc22",
-        "name": "M-System",
-        "topic": "",
-        "showStatusActivities": false,
-        "logIOActivities": false,
-        "showErrors": false,
-        "unitid": "1",
-        "dataType": "InputRegister",
-        "adr": "16",
-        "quantity": "7",
-        "rate": "500",
-        "rateUnit": "ms",
-        "delayOnStart": false,
-        "startDelayTime": "",
-        "server": "6107a3cb1efd575f",
-        "useIOFile": false,
-        "ioFile": "",
-        "useIOForPayload": false,
-        "emptyMsgOnFail": false,
-        "x": 120,
-        "y": 440,
-        "wires": [
-            [],
-            [
-                "b4267483ad5449c5"
-            ]
-        ]
-    },
-    {
         "id": "178bf530c4b5efdd",
         "type": "debug",
         "z": "e3edd6748fb7dc22",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -2314,7 +2309,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 610,
-        "y": 500,
+        "y": 600,
         "wires": []
     },
     {
@@ -2328,14 +2323,11 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 360,
-        "y": 440,
+        "x": 640,
+        "y": 460,
         "wires": [
             [
-                "178bf530c4b5efdd",
-                "3b9b3975b20ba4c4",
-                "302a5f478c873f5e",
-                "1d8d9f5fb4f3cfba"
+                "c411a8b0c7627ae1"
             ]
         ]
     },
@@ -2353,7 +2345,7 @@
         "layout": "col-center",
         "className": "",
         "x": 620,
-        "y": 540,
+        "y": 640,
         "wires": []
     },
     {
@@ -2370,7 +2362,7 @@
         "layout": "col-center",
         "className": "",
         "x": 620,
-        "y": 580,
+        "y": 680,
         "wires": []
     },
     {
@@ -2388,7 +2380,7 @@
         "org": "jmu-water-intake-cisadane",
         "bucket": "water-intake-bucket",
         "x": 640,
-        "y": 460,
+        "y": 560,
         "wires": []
     },
     {
@@ -2396,7 +2388,7 @@
         "type": "debug",
         "z": "e3edd6748fb7dc22",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -2492,6 +2484,168 @@
             [
                 "5c9153fda05a47f9",
                 "d2bf01c0252f47eb"
+            ]
+        ]
+    },
+    {
+        "id": "acec58c01b9048c3",
+        "type": "modbus-flex-getter",
+        "z": "e3edd6748fb7dc22",
+        "name": "Motor Status",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "logIOActivities": false,
+        "server": "6107a3cb1efd575f",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": true,
+        "x": 410,
+        "y": 360,
+        "wires": [
+            [],
+            [
+                "c411a8b0c7627ae1"
+            ]
+        ]
+    },
+    {
+        "id": "b03fa10292d251df",
+        "type": "function",
+        "z": "e3edd6748fb7dc22",
+        "name": "",
+        "func": "msg.payload = {\n    value: msg.payload,\n    'fc': 2,\n    'unitid': 1,\n    'address': 192,\n    'quantity': 4\n};\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 220,
+        "y": 360,
+        "wires": [
+            [
+                "acec58c01b9048c3"
+            ]
+        ]
+    },
+    {
+        "id": "6cdf62f540827454",
+        "type": "function",
+        "z": "e3edd6748fb7dc22",
+        "name": "",
+        "func": "msg.payload = {\n    value: msg.payload,\n    'fc': 3,\n    'unitid': 1,\n    'address': 0,\n    'quantity': 20\n};\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 220,
+        "y": 420,
+        "wires": [
+            [
+                "14f8acb452e32696"
+            ]
+        ]
+    },
+    {
+        "id": "14f8acb452e32696",
+        "type": "modbus-flex-getter",
+        "z": "e3edd6748fb7dc22",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "logIOActivities": false,
+        "server": "6107a3cb1efd575f",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": true,
+        "x": 430,
+        "y": 420,
+        "wires": [
+            [],
+            [
+                "b4267483ad5449c5",
+                "c411a8b0c7627ae1"
+            ]
+        ]
+    },
+    {
+        "id": "c411a8b0c7627ae1",
+        "type": "debug",
+        "z": "e3edd6748fb7dc22",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 750,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "1bfc22af89dacfc9",
+        "type": "inject",
+        "z": "e3edd6748fb7dc22",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 80,
+        "y": 360,
+        "wires": [
+            [
+                "b03fa10292d251df"
+            ]
+        ]
+    },
+    {
+        "id": "bcb33c101ec6bda7",
+        "type": "modbus-read",
+        "z": "e3edd6748fb7dc22",
+        "name": "",
+        "topic": "",
+        "showStatusActivities": true,
+        "logIOActivities": false,
+        "showErrors": true,
+        "unitid": "1",
+        "dataType": "HoldingRegister",
+        "adr": "16",
+        "quantity": "2",
+        "rate": "1",
+        "rateUnit": "m",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "6107a3cb1efd575f",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": true,
+        "x": 360,
+        "y": 520,
+        "wires": [
+            [],
+            [
+                "c411a8b0c7627ae1"
             ]
         ]
     }
