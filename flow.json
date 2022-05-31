@@ -2,10 +2,174 @@
     {
         "id": "e3edd6748fb7dc22",
         "type": "tab",
-        "label": "Flow 1",
+        "label": "Main Flow",
         "disabled": false,
         "info": "",
         "env": []
+    },
+    {
+        "id": "3436748c92488ba5",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "cc41e3ba79b30b57",
+        "type": "tab",
+        "label": "Flow 3",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "d5412cf213c3058b",
+        "type": "subflow",
+        "name": "Power Meter PLN 2",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 120,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "98c8fe5785f68e3b"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 1100,
+                "y": 440,
+                "wires": [
+                    {
+                        "id": "1db3633c7b14c1fc",
+                        "port": 0
+                    },
+                    {
+                        "id": "b8e0f433148ed27d",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "75e384e6e6384e79",
+        "type": "subflow",
+        "name": "Power Meter PLN 1",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 140,
+                "y": 120,
+                "wires": [
+                    {
+                        "id": "0cb7275e1e6eca46"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 1260,
+                "y": 160,
+                "wires": [
+                    {
+                        "id": "5f22c7fc8aa0da8d",
+                        "port": 0
+                    },
+                    {
+                        "id": "801f70ddf687c536",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "a04c16fc3eca7a05",
+        "type": "subflow",
+        "name": "Power Meter Genset 1",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 120,
+                "y": 120,
+                "wires": [
+                    {
+                        "id": "a358de76433d40d2"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 1100,
+                "y": 420,
+                "wires": [
+                    {
+                        "id": "2915a6b8872b1af6",
+                        "port": 0
+                    },
+                    {
+                        "id": "4bb7292f4e2f4699",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "4014f410b0d7b49b",
+        "type": "subflow",
+        "name": "Power Meter Genset 2",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 140,
+                "y": 120,
+                "wires": [
+                    {
+                        "id": "08c71e07a7013069"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 1120,
+                "y": 420,
+                "wires": [
+                    {
+                        "id": "c6524a6d5b777638",
+                        "port": 0
+                    },
+                    {
+                        "id": "6371d637f9ca9037",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
     },
     {
         "id": "6107a3cb1efd575f",
@@ -26,11 +190,11 @@
         "serialParity": "none",
         "serialConnectionDelay": "100",
         "serialAsciiResponseStartDelimiter": "0x3A",
-        "unit_id": "1",
-        "commandDelay": "1",
-        "clientTimeout": "1000",
+        "unit_id": 1,
+        "commandDelay": 1,
+        "clientTimeout": 1000,
         "reconnectOnTimeout": true,
-        "reconnectTimeout": "2000",
+        "reconnectTimeout": 2000,
         "parallelUnitIdsAllowed": true
     },
     {
@@ -164,6 +328,1948 @@
         "rejectUnauthorized": true
     },
     {
+        "id": "6755680b053cc1fa",
+        "type": "modbus-client",
+        "name": "Moxa Water Intake",
+        "clienttype": "tcp",
+        "bufferCommands": true,
+        "stateLogEnabled": false,
+        "queueLogEnabled": false,
+        "tcpHost": "192.168.0.10",
+        "tcpPort": "502",
+        "tcpType": "DEFAULT",
+        "serialPort": "/dev/ttyUSB",
+        "serialType": "RTU-BUFFERD",
+        "serialBaudrate": "9600",
+        "serialDatabits": "8",
+        "serialStopbits": "1",
+        "serialParity": "none",
+        "serialConnectionDelay": "100",
+        "serialAsciiResponseStartDelimiter": "0x3A",
+        "unit_id": "1",
+        "commandDelay": "1",
+        "clientTimeout": "1000",
+        "reconnectOnTimeout": false,
+        "reconnectTimeout": "2000",
+        "parallelUnitIdsAllowed": true
+    },
+    {
+        "id": "98c8fe5785f68e3b",
+        "type": "function",
+        "z": "d5412cf213c3058b",
+        "name": "Voltage",
+        "func": "msg.payload = {\n    value: msg.payload,\n    'fc': 3,\n    'unitid': 2,\n    'address': 3035,\n    'quantity': 2\n};\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 140,
+        "wires": [
+            [
+                "4acc00a041a523ab"
+            ]
+        ]
+    },
+    {
+        "id": "4acc00a041a523ab",
+        "type": "modbus-flex-getter",
+        "z": "d5412cf213c3058b",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "logIOActivities": false,
+        "server": "6755680b053cc1fa",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": true,
+        "keepMsgProperties": true,
+        "x": 470,
+        "y": 140,
+        "wires": [
+            [],
+            [
+                "41c8bf3770d6931e"
+            ]
+        ]
+    },
+    {
+        "id": "54b182cf3fb4128a",
+        "type": "function",
+        "z": "d5412cf213c3058b",
+        "name": "Frequency",
+        "func": "msg.payload = {\n    value: msg.payload,\n    'fc': 3,\n    'unitid': 2,\n    'address': 3109,\n    'quantity': 2\n\n};\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 200,
+        "wires": [
+            [
+                "5bc18e5ab7bf12a6"
+            ]
+        ]
+    },
+    {
+        "id": "6740f2c08e76b587",
+        "type": "function",
+        "z": "d5412cf213c3058b",
+        "name": "Current",
+        "func": "msg.payload = {\n    value: msg.payload,\n    'fc': 3,\n    'unitid': 2,\n    'address': 3009,\n    'quantity': 2\n\n};\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 260,
+        "wires": [
+            [
+                "b408e1f582faefc8"
+            ]
+        ]
+    },
+    {
+        "id": "e729cfbfa1e87463",
+        "type": "function",
+        "z": "d5412cf213c3058b",
+        "name": "Power",
+        "func": "msg.payload = {\n    value: msg.payload,\n    'fc': 3,\n    'unitid': 2,\n    'address': 2699,\n    'quantity': 2\n\n};\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 250,
+        "y": 320,
+        "wires": [
+            [
+                "64905e1c5ab1b985"
+            ]
+        ]
+    },
+    {
+        "id": "376ed49e53953f25",
+        "type": "function",
+        "z": "d5412cf213c3058b",
+        "name": "Power Factor",
+        "func": "msg.payload = {\n    value: msg.payload,\n    'fc': 3,\n    'unitid': 2,\n    'address': 3191,\n    'quantity': 2\n\n};\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 250,
+        "y": 380,
+        "wires": [
+            [
+                "7e44477411ae6e11"
+            ]
+        ]
+    },
+    {
+        "id": "7ef20f4688fb2275",
+        "type": "change",
+        "z": "d5412cf213c3058b",
+        "name": "Move To msg.voltage",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.buffer",
+                "pt": "msg",
+                "to": "voltage",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 740,
+        "y": 140,
+        "wires": [
+            [
+                "54b182cf3fb4128a"
+            ]
+        ]
+    },
+    {
+        "id": "6931d9fc3a03eeed",
+        "type": "change",
+        "z": "d5412cf213c3058b",
+        "name": "Move To msg.frequency",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.buffer",
+                "pt": "msg",
+                "to": "frequency",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 730,
+        "y": 200,
+        "wires": [
+            [
+                "6740f2c08e76b587"
+            ]
+        ]
+    },
+    {
+        "id": "46eaa8f1f8217a8e",
+        "type": "change",
+        "z": "d5412cf213c3058b",
+        "name": "Move To msg.current",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.buffer",
+                "pt": "msg",
+                "to": "current",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 720,
+        "y": 260,
+        "wires": [
+            [
+                "e729cfbfa1e87463"
+            ]
+        ]
+    },
+    {
+        "id": "bc183cc1430c9e67",
+        "type": "change",
+        "z": "d5412cf213c3058b",
+        "name": "Move To msg.power",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.buffer",
+                "pt": "msg",
+                "to": "power",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 740,
+        "y": 320,
+        "wires": [
+            [
+                "376ed49e53953f25"
+            ]
+        ]
+    },
+    {
+        "id": "7ea68a8aab537452",
+        "type": "change",
+        "z": "d5412cf213c3058b",
+        "name": "Move To msg.power",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.buffer",
+                "pt": "msg",
+                "to": "power_factor",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 740,
+        "y": 380,
+        "wires": [
+            [
+                "983994a47fdb107c"
+            ]
+        ]
+    },
+    {
+        "id": "5bc18e5ab7bf12a6",
+        "type": "modbus-flex-getter",
+        "z": "d5412cf213c3058b",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "logIOActivities": false,
+        "server": "6755680b053cc1fa",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": true,
+        "x": 470,
+        "y": 200,
+        "wires": [
+            [],
+            [
+                "6931d9fc3a03eeed"
+            ]
+        ]
+    },
+    {
+        "id": "b408e1f582faefc8",
+        "type": "modbus-flex-getter",
+        "z": "d5412cf213c3058b",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "logIOActivities": false,
+        "server": "6755680b053cc1fa",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": true,
+        "x": 470,
+        "y": 260,
+        "wires": [
+            [],
+            [
+                "46eaa8f1f8217a8e"
+            ]
+        ]
+    },
+    {
+        "id": "64905e1c5ab1b985",
+        "type": "modbus-flex-getter",
+        "z": "d5412cf213c3058b",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "logIOActivities": false,
+        "server": "6755680b053cc1fa",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": true,
+        "x": 450,
+        "y": 320,
+        "wires": [
+            [],
+            [
+                "bc183cc1430c9e67"
+            ]
+        ]
+    },
+    {
+        "id": "7e44477411ae6e11",
+        "type": "modbus-flex-getter",
+        "z": "d5412cf213c3058b",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "logIOActivities": false,
+        "server": "6755680b053cc1fa",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": true,
+        "x": 450,
+        "y": 380,
+        "wires": [
+            [],
+            [
+                "7ea68a8aab537452"
+            ]
+        ]
+    },
+    {
+        "id": "1db3633c7b14c1fc",
+        "type": "function",
+        "z": "d5412cf213c3058b",
+        "name": "",
+        "func": "msg.payload = {\n    plant: \"Water Intake Cisadane\",\n    powermeter: \"PLN 2\",\n    voltage: Math.round(Buffer.from(msg.voltage).readFloatBE()),//* 1000 + Number.EPSILON) / 1000,\n    current: Math.round(Buffer.from(msg.current).readFloatBE() * 1000 + Number.EPSILON) / 1000,\n    frequency: Math.round(Buffer.from(msg.frequency).readFloatBE() * 1000 + Number.EPSILON) / 1000,\n    power: Math.round(Buffer.from(msg.power).readFloatBE()),\n    powerfactor: Math.round(Buffer.from(msg.power_factor).readFloatBE() * 1000 + Number.EPSILON) / 1000,\n    thd: Math.round(Buffer.from(msg.thd).readFloatBE() * 1000 + Number.EPSILON) / 1000\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 940,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "983994a47fdb107c",
+        "type": "function",
+        "z": "d5412cf213c3058b",
+        "name": "THD",
+        "func": "msg.payload = {\n    value: msg.payload,\n    'fc': 3,\n    'unitid': 2,\n    'address': 21337,\n    'quantity': 2\n\n};\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 230,
+        "y": 440,
+        "wires": [
+            [
+                "9aad7a5dddb48251"
+            ]
+        ]
+    },
+    {
+        "id": "94d876a0092da7a0",
+        "type": "change",
+        "z": "d5412cf213c3058b",
+        "name": "Move To msg.thd",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.buffer",
+                "pt": "msg",
+                "to": "thd",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 730,
+        "y": 440,
+        "wires": [
+            [
+                "1db3633c7b14c1fc"
+            ]
+        ]
+    },
+    {
+        "id": "9aad7a5dddb48251",
+        "type": "modbus-flex-getter",
+        "z": "d5412cf213c3058b",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "logIOActivities": false,
+        "server": "6755680b053cc1fa",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": true,
+        "x": 450,
+        "y": 440,
+        "wires": [
+            [],
+            [
+                "94d876a0092da7a0"
+            ]
+        ]
+    },
+    {
+        "id": "41c8bf3770d6931e",
+        "type": "switch",
+        "z": "d5412cf213c3058b",
+        "name": "Check Connection",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "string",
+                "vt": "string"
+            },
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "false",
+        "repair": true,
+        "outputs": 2,
+        "x": 710,
+        "y": 80,
+        "wires": [
+            [
+                "b8e0f433148ed27d"
+            ],
+            [
+                "7ef20f4688fb2275"
+            ]
+        ]
+    },
+    {
+        "id": "b8e0f433148ed27d",
+        "type": "function",
+        "z": "d5412cf213c3058b",
+        "name": "",
+        "func": "msg.payload = {\n    plant: \"Water Intake Cisadane\",\n    powermeter: \"PLN 2\",\n    voltage: 0,\n    current: 0,\n    frequency: 0,\n    power: 0,\n    powerfactor: 0,\n    thd: 0\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 940,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0cb7275e1e6eca46",
+        "type": "function",
+        "z": "75e384e6e6384e79",
+        "name": "Voltage",
+        "func": "msg.payload = {\n    value: msg.payload,\n    'fc': 3,\n    'unitid': 1,\n    'address': 3035,\n    'quantity': 2\n};\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 120,
+        "wires": [
+            [
+                "027eab424df8b439"
+            ]
+        ]
+    },
+    {
+        "id": "027eab424df8b439",
+        "type": "modbus-flex-getter",
+        "z": "75e384e6e6384e79",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "logIOActivities": false,
+        "server": "6755680b053cc1fa",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": true,
+        "keepMsgProperties": true,
+        "x": 490,
+        "y": 120,
+        "wires": [
+            [],
+            [
+                "96339d7ae330da73"
+            ]
+        ]
+    },
+    {
+        "id": "c633f06350626f51",
+        "type": "function",
+        "z": "75e384e6e6384e79",
+        "name": "Frequency",
+        "func": "msg.payload = {\n    value: msg.payload,\n    'fc': 3,\n    'unitid': 1,\n    'address': 3109,\n    'quantity': 2\n\n};\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 180,
+        "wires": [
+            [
+                "a0d19c6df077c474"
+            ]
+        ]
+    },
+    {
+        "id": "2e626b16aacf77d3",
+        "type": "function",
+        "z": "75e384e6e6384e79",
+        "name": "Current",
+        "func": "msg.payload = {\n    value: msg.payload,\n    'fc': 3,\n    'unitid': 1,\n    'address': 3009,\n    'quantity': 2\n\n};\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 240,
+        "wires": [
+            [
+                "ceab8ae918ab8b86"
+            ]
+        ]
+    },
+    {
+        "id": "74bd19652d81c62f",
+        "type": "function",
+        "z": "75e384e6e6384e79",
+        "name": "Power",
+        "func": "msg.payload = {\n    value: msg.payload,\n    'fc': 3,\n    'unitid': 1,\n    'address': 2699,\n    'quantity': 2\n\n};\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 300,
+        "wires": [
+            [
+                "82078108f5b29a27"
+            ]
+        ]
+    },
+    {
+        "id": "94beeaa6947f0310",
+        "type": "function",
+        "z": "75e384e6e6384e79",
+        "name": "Power Factor",
+        "func": "msg.payload = {\n    value: msg.payload,\n    'fc': 3,\n    'unitid': 1,\n    'address': 3191,\n    'quantity': 2\n\n};\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 360,
+        "wires": [
+            [
+                "7833379d2c3ebab6"
+            ]
+        ]
+    },
+    {
+        "id": "f1fdc5c90f557998",
+        "type": "change",
+        "z": "75e384e6e6384e79",
+        "name": "Move To msg.voltage",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.buffer",
+                "pt": "msg",
+                "to": "voltage",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 760,
+        "y": 120,
+        "wires": [
+            [
+                "c633f06350626f51"
+            ]
+        ]
+    },
+    {
+        "id": "33504a10b759e9b7",
+        "type": "change",
+        "z": "75e384e6e6384e79",
+        "name": "Move To msg.frequency",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.buffer",
+                "pt": "msg",
+                "to": "frequency",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 740,
+        "y": 180,
+        "wires": [
+            [
+                "2e626b16aacf77d3"
+            ]
+        ]
+    },
+    {
+        "id": "c38ea5eded19cbbd",
+        "type": "change",
+        "z": "75e384e6e6384e79",
+        "name": "Move To msg.current",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.buffer",
+                "pt": "msg",
+                "to": "current",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 730,
+        "y": 240,
+        "wires": [
+            [
+                "74bd19652d81c62f"
+            ]
+        ]
+    },
+    {
+        "id": "e902525033fa6fba",
+        "type": "change",
+        "z": "75e384e6e6384e79",
+        "name": "Move To msg.power",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.buffer",
+                "pt": "msg",
+                "to": "power",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 750,
+        "y": 300,
+        "wires": [
+            [
+                "94beeaa6947f0310"
+            ]
+        ]
+    },
+    {
+        "id": "5dee2b6af2b6e717",
+        "type": "change",
+        "z": "75e384e6e6384e79",
+        "name": "Move To msg.power",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.buffer",
+                "pt": "msg",
+                "to": "power_factor",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 750,
+        "y": 360,
+        "wires": [
+            [
+                "38d06b0b9e2dc38a"
+            ]
+        ]
+    },
+    {
+        "id": "a0d19c6df077c474",
+        "type": "modbus-flex-getter",
+        "z": "75e384e6e6384e79",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "logIOActivities": false,
+        "server": "6755680b053cc1fa",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": true,
+        "keepMsgProperties": true,
+        "x": 480,
+        "y": 180,
+        "wires": [
+            [],
+            [
+                "33504a10b759e9b7"
+            ]
+        ]
+    },
+    {
+        "id": "ceab8ae918ab8b86",
+        "type": "modbus-flex-getter",
+        "z": "75e384e6e6384e79",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "logIOActivities": false,
+        "server": "6755680b053cc1fa",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": true,
+        "keepMsgProperties": true,
+        "x": 480,
+        "y": 240,
+        "wires": [
+            [],
+            [
+                "c38ea5eded19cbbd"
+            ]
+        ]
+    },
+    {
+        "id": "82078108f5b29a27",
+        "type": "modbus-flex-getter",
+        "z": "75e384e6e6384e79",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "logIOActivities": false,
+        "server": "6755680b053cc1fa",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": true,
+        "keepMsgProperties": true,
+        "x": 460,
+        "y": 300,
+        "wires": [
+            [],
+            [
+                "e902525033fa6fba"
+            ]
+        ]
+    },
+    {
+        "id": "7833379d2c3ebab6",
+        "type": "modbus-flex-getter",
+        "z": "75e384e6e6384e79",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "logIOActivities": false,
+        "server": "6755680b053cc1fa",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": true,
+        "keepMsgProperties": true,
+        "x": 460,
+        "y": 360,
+        "wires": [
+            [],
+            [
+                "5dee2b6af2b6e717"
+            ]
+        ]
+    },
+    {
+        "id": "5f22c7fc8aa0da8d",
+        "type": "function",
+        "z": "75e384e6e6384e79",
+        "name": "",
+        "func": "msg.payload = {\n    plant: \"Water Intake Cisadane\",\n    powermeter: \"PLN 1\",\n    voltage: Math.round(Buffer.from(msg.voltage).readFloatBE()),//* 1000 + Number.EPSILON) / 1000,\n    current: Math.round(Buffer.from(msg.current).readFloatBE() * 1000 + Number.EPSILON) / 1000,\n    frequency: Math.round(Buffer.from(msg.frequency).readFloatBE() * 1000 + Number.EPSILON) / 1000,\n    power: Math.round(Buffer.from(msg.power).readFloatBE()),\n    powerfactor: Math.round(Buffer.from(msg.power_factor).readFloatBE() * 1000 + Number.EPSILON) / 1000,\n    thd: Math.round(Buffer.from(msg.thd).readFloatBE() * 1000 + Number.EPSILON) / 1000\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 950,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "38d06b0b9e2dc38a",
+        "type": "function",
+        "z": "75e384e6e6384e79",
+        "name": "THD",
+        "func": "msg.payload = {\n    value: msg.payload,\n    'fc': 3,\n    'unitid': 1,\n    'address': 21337,\n    'quantity': 2\n\n};\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 240,
+        "y": 420,
+        "wires": [
+            [
+                "862bcfa555f4cec5"
+            ]
+        ]
+    },
+    {
+        "id": "3b70f4b1b314de41",
+        "type": "change",
+        "z": "75e384e6e6384e79",
+        "name": "Move To msg.thd",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.buffer",
+                "pt": "msg",
+                "to": "thd",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 740,
+        "y": 420,
+        "wires": [
+            [
+                "5f22c7fc8aa0da8d"
+            ]
+        ]
+    },
+    {
+        "id": "862bcfa555f4cec5",
+        "type": "modbus-flex-getter",
+        "z": "75e384e6e6384e79",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "logIOActivities": false,
+        "server": "6755680b053cc1fa",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": true,
+        "keepMsgProperties": true,
+        "x": 460,
+        "y": 420,
+        "wires": [
+            [],
+            [
+                "3b70f4b1b314de41"
+            ]
+        ]
+    },
+    {
+        "id": "96339d7ae330da73",
+        "type": "switch",
+        "z": "75e384e6e6384e79",
+        "name": "Check Connection",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "string",
+                "vt": "string"
+            },
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "false",
+        "repair": true,
+        "outputs": 2,
+        "x": 730,
+        "y": 60,
+        "wires": [
+            [
+                "801f70ddf687c536"
+            ],
+            [
+                "f1fdc5c90f557998"
+            ]
+        ]
+    },
+    {
+        "id": "801f70ddf687c536",
+        "type": "function",
+        "z": "75e384e6e6384e79",
+        "name": "",
+        "func": "msg.payload = {\n    plant: \"Water Intake Cisadane\",\n    powermeter: \"PLN 1\",\n    voltage: 0,\n    current: 0,\n    frequency: 0,\n    power: 0,\n    powerfactor: 0,\n    thd: 0\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 980,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a358de76433d40d2",
+        "type": "function",
+        "z": "a04c16fc3eca7a05",
+        "name": "Voltage",
+        "func": "msg.payload = {\n    value: msg.payload,\n    'fc': 3,\n    'unitid': 3,\n    'address': 3035,\n    'quantity': 2\n};\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 120,
+        "wires": [
+            [
+                "8fe33efed6cd9ded"
+            ]
+        ]
+    },
+    {
+        "id": "8fe33efed6cd9ded",
+        "type": "modbus-flex-getter",
+        "z": "a04c16fc3eca7a05",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "logIOActivities": false,
+        "server": "6755680b053cc1fa",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": true,
+        "keepMsgProperties": true,
+        "x": 480,
+        "y": 120,
+        "wires": [
+            [],
+            [
+                "559112f267837b0e"
+            ]
+        ]
+    },
+    {
+        "id": "719773b0c6cbf3a1",
+        "type": "function",
+        "z": "a04c16fc3eca7a05",
+        "name": "Frequency",
+        "func": "msg.payload = {\n    value: msg.payload,\n    'fc': 3,\n    'unitid': 3,\n    'address': 3109,\n    'quantity': 2\n\n};\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 180,
+        "wires": [
+            [
+                "79c84abedec56a80"
+            ]
+        ]
+    },
+    {
+        "id": "96a4c219163440a8",
+        "type": "function",
+        "z": "a04c16fc3eca7a05",
+        "name": "Current",
+        "func": "msg.payload = {\n    value: msg.payload,\n    'fc': 3,\n    'unitid': 3,\n    'address': 3009,\n    'quantity': 2\n\n};\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 240,
+        "wires": [
+            [
+                "8d0e8d4d76a3be68"
+            ]
+        ]
+    },
+    {
+        "id": "8e58e8d3163ca1f7",
+        "type": "function",
+        "z": "a04c16fc3eca7a05",
+        "name": "Power",
+        "func": "msg.payload = {\n    value: msg.payload,\n    'fc': 3,\n    'unitid': 3,\n    'address': 2699,\n    'quantity': 2\n\n};\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 300,
+        "wires": [
+            [
+                "2241e679939b4db2"
+            ]
+        ]
+    },
+    {
+        "id": "835a1a3393bc1693",
+        "type": "function",
+        "z": "a04c16fc3eca7a05",
+        "name": "Power Factor",
+        "func": "msg.payload = {\n    value: msg.payload,\n    'fc': 3,\n    'unitid': 3,\n    'address': 3191,\n    'quantity': 2\n\n};\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 360,
+        "wires": [
+            [
+                "bf18ada2e30627ee"
+            ]
+        ]
+    },
+    {
+        "id": "db5a4969adc154ba",
+        "type": "change",
+        "z": "a04c16fc3eca7a05",
+        "name": "Move To msg.voltage",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.buffer",
+                "pt": "msg",
+                "to": "voltage",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 760,
+        "y": 120,
+        "wires": [
+            [
+                "719773b0c6cbf3a1"
+            ]
+        ]
+    },
+    {
+        "id": "8f28f4e09d89171e",
+        "type": "change",
+        "z": "a04c16fc3eca7a05",
+        "name": "Move To msg.frequency",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.buffer",
+                "pt": "msg",
+                "to": "frequency",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 740,
+        "y": 180,
+        "wires": [
+            [
+                "96a4c219163440a8"
+            ]
+        ]
+    },
+    {
+        "id": "9269a34764fddd18",
+        "type": "change",
+        "z": "a04c16fc3eca7a05",
+        "name": "Move To msg.current",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.buffer",
+                "pt": "msg",
+                "to": "current",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 730,
+        "y": 240,
+        "wires": [
+            [
+                "8e58e8d3163ca1f7"
+            ]
+        ]
+    },
+    {
+        "id": "a5566dc3e0d6b936",
+        "type": "change",
+        "z": "a04c16fc3eca7a05",
+        "name": "Move To msg.power",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.buffer",
+                "pt": "msg",
+                "to": "power",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 750,
+        "y": 300,
+        "wires": [
+            [
+                "835a1a3393bc1693"
+            ]
+        ]
+    },
+    {
+        "id": "5cb705690e255c36",
+        "type": "change",
+        "z": "a04c16fc3eca7a05",
+        "name": "Move To msg.power",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.buffer",
+                "pt": "msg",
+                "to": "power_factor",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 750,
+        "y": 360,
+        "wires": [
+            [
+                "50881c711fc91842"
+            ]
+        ]
+    },
+    {
+        "id": "79c84abedec56a80",
+        "type": "modbus-flex-getter",
+        "z": "a04c16fc3eca7a05",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "logIOActivities": false,
+        "server": "6755680b053cc1fa",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": true,
+        "x": 480,
+        "y": 180,
+        "wires": [
+            [],
+            [
+                "8f28f4e09d89171e"
+            ]
+        ]
+    },
+    {
+        "id": "8d0e8d4d76a3be68",
+        "type": "modbus-flex-getter",
+        "z": "a04c16fc3eca7a05",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "logIOActivities": false,
+        "server": "6755680b053cc1fa",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": true,
+        "x": 480,
+        "y": 240,
+        "wires": [
+            [],
+            [
+                "9269a34764fddd18"
+            ]
+        ]
+    },
+    {
+        "id": "2241e679939b4db2",
+        "type": "modbus-flex-getter",
+        "z": "a04c16fc3eca7a05",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "logIOActivities": false,
+        "server": "6755680b053cc1fa",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": true,
+        "x": 460,
+        "y": 300,
+        "wires": [
+            [],
+            [
+                "a5566dc3e0d6b936"
+            ]
+        ]
+    },
+    {
+        "id": "bf18ada2e30627ee",
+        "type": "modbus-flex-getter",
+        "z": "a04c16fc3eca7a05",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "logIOActivities": false,
+        "server": "6755680b053cc1fa",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": true,
+        "x": 460,
+        "y": 360,
+        "wires": [
+            [],
+            [
+                "5cb705690e255c36"
+            ]
+        ]
+    },
+    {
+        "id": "2915a6b8872b1af6",
+        "type": "function",
+        "z": "a04c16fc3eca7a05",
+        "name": "",
+        "func": "msg.payload = {\n    plant: \"Water Intake Cisadane\",\n    powermeter: \"Genset 1\",\n    voltage: Math.round(Buffer.from(msg.voltage).readFloatBE()),//* 1000 + Number.EPSILON) / 1000,\n    current: Math.round(Buffer.from(msg.current).readFloatBE() * 1000 + Number.EPSILON) / 1000,\n    frequency: Math.round(Buffer.from(msg.frequency).readFloatBE() * 1000 + Number.EPSILON) / 1000,\n    power: Math.round(Buffer.from(msg.power).readFloatBE()),\n    powerfactor: Math.round(Buffer.from(msg.power_factor).readFloatBE() * 1000 + Number.EPSILON) / 1000,\n    thd: Math.round(Buffer.from(msg.thd).readFloatBE() * 1000 + Number.EPSILON) / 1000\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 950,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "50881c711fc91842",
+        "type": "function",
+        "z": "a04c16fc3eca7a05",
+        "name": "THD",
+        "func": "msg.payload = {\n    value: msg.payload,\n    'fc': 3,\n    'unitid': 3,\n    'address': 21337,\n    'quantity': 2\n\n};\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 240,
+        "y": 420,
+        "wires": [
+            [
+                "3815b485dd179b84"
+            ]
+        ]
+    },
+    {
+        "id": "aeaf88a554ce9865",
+        "type": "change",
+        "z": "a04c16fc3eca7a05",
+        "name": "Move To msg.thd",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.buffer",
+                "pt": "msg",
+                "to": "thd",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 740,
+        "y": 420,
+        "wires": [
+            [
+                "2915a6b8872b1af6"
+            ]
+        ]
+    },
+    {
+        "id": "3815b485dd179b84",
+        "type": "modbus-flex-getter",
+        "z": "a04c16fc3eca7a05",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "logIOActivities": false,
+        "server": "6755680b053cc1fa",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": true,
+        "x": 460,
+        "y": 420,
+        "wires": [
+            [],
+            [
+                "aeaf88a554ce9865"
+            ]
+        ]
+    },
+    {
+        "id": "559112f267837b0e",
+        "type": "switch",
+        "z": "a04c16fc3eca7a05",
+        "name": "Check Connection",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "string",
+                "vt": "string"
+            },
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "false",
+        "repair": true,
+        "outputs": 2,
+        "x": 730,
+        "y": 60,
+        "wires": [
+            [
+                "4bb7292f4e2f4699"
+            ],
+            [
+                "db5a4969adc154ba"
+            ]
+        ]
+    },
+    {
+        "id": "4bb7292f4e2f4699",
+        "type": "function",
+        "z": "a04c16fc3eca7a05",
+        "name": "",
+        "func": "msg.payload = {\n    plant: \"Water Intake Cisadane\",\n    powermeter: \"Genset 1\",\n    voltage: 0,\n    current: 0,\n    frequency: 0,\n    power: 0,\n    powerfactor: 0,\n    thd: 0\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 960,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "08c71e07a7013069",
+        "type": "function",
+        "z": "4014f410b0d7b49b",
+        "name": "Voltage",
+        "func": "msg.payload = {\n    value: msg.payload,\n    'fc': 3,\n    'unitid': 4,\n    'address': 3035,\n    'quantity': 2\n};\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 120,
+        "wires": [
+            [
+                "63a9e7d0efab4fe7"
+            ]
+        ]
+    },
+    {
+        "id": "63a9e7d0efab4fe7",
+        "type": "modbus-flex-getter",
+        "z": "4014f410b0d7b49b",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "logIOActivities": false,
+        "server": "6755680b053cc1fa",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": true,
+        "keepMsgProperties": true,
+        "x": 500,
+        "y": 120,
+        "wires": [
+            [],
+            [
+                "a049fa5450a8b0a3"
+            ]
+        ]
+    },
+    {
+        "id": "308fcb3b6d4deb40",
+        "type": "function",
+        "z": "4014f410b0d7b49b",
+        "name": "Frequency",
+        "func": "msg.payload = {\n    value: msg.payload,\n    'fc': 3,\n    'unitid': 4,\n    'address': 3109,\n    'quantity': 2\n\n};\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 180,
+        "wires": [
+            [
+                "e1298356f66fb007"
+            ]
+        ]
+    },
+    {
+        "id": "ef4a8e944ea9d853",
+        "type": "function",
+        "z": "4014f410b0d7b49b",
+        "name": "Current",
+        "func": "msg.payload = {\n    value: msg.payload,\n    'fc': 3,\n    'unitid': 4,\n    'address': 3009,\n    'quantity': 2\n\n};\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 240,
+        "wires": [
+            [
+                "77da109cab326341"
+            ]
+        ]
+    },
+    {
+        "id": "4a16b81234fdfe4d",
+        "type": "function",
+        "z": "4014f410b0d7b49b",
+        "name": "Power",
+        "func": "msg.payload = {\n    value: msg.payload,\n    'fc': 3,\n    'unitid': 4,\n    'address': 2699,\n    'quantity': 2\n\n};\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 300,
+        "wires": [
+            [
+                "d4922d102c11b62b"
+            ]
+        ]
+    },
+    {
+        "id": "11b6477e22c7eb71",
+        "type": "function",
+        "z": "4014f410b0d7b49b",
+        "name": "Power Factor",
+        "func": "msg.payload = {\n    value: msg.payload,\n    'fc': 3,\n    'unitid': 4,\n    'address': 3191,\n    'quantity': 2\n\n};\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 360,
+        "wires": [
+            [
+                "908a63204fbfd40e"
+            ]
+        ]
+    },
+    {
+        "id": "98627a1524b0bf49",
+        "type": "change",
+        "z": "4014f410b0d7b49b",
+        "name": "Move To msg.voltage",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.buffer",
+                "pt": "msg",
+                "to": "voltage",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 120,
+        "wires": [
+            [
+                "308fcb3b6d4deb40"
+            ]
+        ]
+    },
+    {
+        "id": "5a98f55072846dcc",
+        "type": "change",
+        "z": "4014f410b0d7b49b",
+        "name": "Move To msg.frequency",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.buffer",
+                "pt": "msg",
+                "to": "frequency",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 760,
+        "y": 180,
+        "wires": [
+            [
+                "ef4a8e944ea9d853"
+            ]
+        ]
+    },
+    {
+        "id": "a3d06386fa7041ba",
+        "type": "change",
+        "z": "4014f410b0d7b49b",
+        "name": "Move To msg.current",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.buffer",
+                "pt": "msg",
+                "to": "current",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 750,
+        "y": 240,
+        "wires": [
+            [
+                "4a16b81234fdfe4d"
+            ]
+        ]
+    },
+    {
+        "id": "f805b9565053fb45",
+        "type": "change",
+        "z": "4014f410b0d7b49b",
+        "name": "Move To msg.power",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.buffer",
+                "pt": "msg",
+                "to": "power",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 770,
+        "y": 300,
+        "wires": [
+            [
+                "11b6477e22c7eb71"
+            ]
+        ]
+    },
+    {
+        "id": "be26ea4fbbe55a0e",
+        "type": "change",
+        "z": "4014f410b0d7b49b",
+        "name": "Move To msg.power",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.buffer",
+                "pt": "msg",
+                "to": "power_factor",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 770,
+        "y": 360,
+        "wires": [
+            [
+                "49c6c2d288f2e197"
+            ]
+        ]
+    },
+    {
+        "id": "e1298356f66fb007",
+        "type": "modbus-flex-getter",
+        "z": "4014f410b0d7b49b",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "logIOActivities": false,
+        "server": "6755680b053cc1fa",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": true,
+        "x": 500,
+        "y": 180,
+        "wires": [
+            [],
+            [
+                "5a98f55072846dcc"
+            ]
+        ]
+    },
+    {
+        "id": "77da109cab326341",
+        "type": "modbus-flex-getter",
+        "z": "4014f410b0d7b49b",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "logIOActivities": false,
+        "server": "6755680b053cc1fa",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": true,
+        "x": 500,
+        "y": 240,
+        "wires": [
+            [],
+            [
+                "a3d06386fa7041ba"
+            ]
+        ]
+    },
+    {
+        "id": "d4922d102c11b62b",
+        "type": "modbus-flex-getter",
+        "z": "4014f410b0d7b49b",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "logIOActivities": false,
+        "server": "6755680b053cc1fa",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": true,
+        "x": 480,
+        "y": 300,
+        "wires": [
+            [],
+            [
+                "f805b9565053fb45"
+            ]
+        ]
+    },
+    {
+        "id": "908a63204fbfd40e",
+        "type": "modbus-flex-getter",
+        "z": "4014f410b0d7b49b",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "logIOActivities": false,
+        "server": "6755680b053cc1fa",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": true,
+        "x": 480,
+        "y": 360,
+        "wires": [
+            [],
+            [
+                "be26ea4fbbe55a0e"
+            ]
+        ]
+    },
+    {
+        "id": "c6524a6d5b777638",
+        "type": "function",
+        "z": "4014f410b0d7b49b",
+        "name": "",
+        "func": "msg.payload = {\n    plant: \"Water Intake Cisadane\",\n    powermeter: \"Genset 2\",\n    voltage: Math.round(Buffer.from(msg.voltage).readFloatBE()),//* 1000 + Number.EPSILON) / 1000,\n    current: Math.round(Buffer.from(msg.current).readFloatBE() * 1000 + Number.EPSILON) / 1000,\n    frequency: Math.round(Buffer.from(msg.frequency).readFloatBE() * 1000 + Number.EPSILON) / 1000,\n    power: Math.round(Buffer.from(msg.power).readFloatBE()),\n    powerfactor: Math.round(Buffer.from(msg.power_factor).readFloatBE() * 1000 + Number.EPSILON) / 1000,\n    thd: Math.round(Buffer.from(msg.thd).readFloatBE() * 1000 + Number.EPSILON) / 1000\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 970,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "49c6c2d288f2e197",
+        "type": "function",
+        "z": "4014f410b0d7b49b",
+        "name": "THD",
+        "func": "msg.payload = {\n    value: msg.payload,\n    'fc': 3,\n    'unitid': 4,\n    'address': 21337,\n    'quantity': 2\n\n};\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 420,
+        "wires": [
+            [
+                "74691cab0ec6905b"
+            ]
+        ]
+    },
+    {
+        "id": "5c09d0b5e71031d3",
+        "type": "change",
+        "z": "4014f410b0d7b49b",
+        "name": "Move To msg.thd",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.buffer",
+                "pt": "msg",
+                "to": "thd",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 760,
+        "y": 420,
+        "wires": [
+            [
+                "c6524a6d5b777638"
+            ]
+        ]
+    },
+    {
+        "id": "74691cab0ec6905b",
+        "type": "modbus-flex-getter",
+        "z": "4014f410b0d7b49b",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "logIOActivities": false,
+        "server": "6755680b053cc1fa",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": true,
+        "x": 480,
+        "y": 420,
+        "wires": [
+            [],
+            [
+                "5c09d0b5e71031d3"
+            ]
+        ]
+    },
+    {
+        "id": "a049fa5450a8b0a3",
+        "type": "switch",
+        "z": "4014f410b0d7b49b",
+        "name": "Check Connection",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "string",
+                "vt": "string"
+            },
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "false",
+        "repair": true,
+        "outputs": 2,
+        "x": 750,
+        "y": 60,
+        "wires": [
+            [
+                "6371d637f9ca9037"
+            ],
+            [
+                "98627a1524b0bf49"
+            ]
+        ]
+    },
+    {
+        "id": "6371d637f9ca9037",
+        "type": "function",
+        "z": "4014f410b0d7b49b",
+        "name": "",
+        "func": "msg.payload = {\n    plant: \"Water Intake Cisadane\",\n    powermeter: \"Genset 2\",\n    voltage: 0,\n    current: 0,\n    frequency: 0,\n    power: 0,\n    powerfactor: 0,\n    thd: 0\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 980,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
         "id": "9bea39a4cc5b17d3",
         "type": "modbus-read",
         "z": "e3edd6748fb7dc22",
@@ -185,8 +2291,8 @@
         "ioFile": "",
         "useIOForPayload": false,
         "emptyMsgOnFail": false,
-        "x": 160,
-        "y": 220,
+        "x": 120,
+        "y": 440,
         "wires": [
             [],
             [
@@ -199,7 +2305,7 @@
         "type": "debug",
         "z": "e3edd6748fb7dc22",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -207,8 +2313,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 630,
-        "y": 220,
+        "x": 610,
+        "y": 500,
         "wires": []
     },
     {
@@ -222,8 +2328,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 380,
-        "y": 220,
+        "x": 360,
+        "y": 440,
         "wires": [
             [
                 "178bf530c4b5efdd",
@@ -246,8 +2352,8 @@
         "format": "{{msg.payload.em1_ampere}}",
         "layout": "col-center",
         "className": "",
-        "x": 630,
-        "y": 300,
+        "x": 620,
+        "y": 540,
         "wires": []
     },
     {
@@ -264,7 +2370,7 @@
         "layout": "col-center",
         "className": "",
         "x": 620,
-        "y": 340,
+        "y": 580,
         "wires": []
     },
     {
@@ -281,8 +2387,112 @@
         "retentionPolicyV18Flux": "",
         "org": "jmu-water-intake-cisadane",
         "bucket": "water-intake-bucket",
-        "x": 660,
-        "y": 160,
+        "x": 640,
+        "y": 460,
         "wires": []
+    },
+    {
+        "id": "5c9153fda05a47f9",
+        "type": "debug",
+        "z": "e3edd6748fb7dc22",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "6e628d179cf95ad4",
+        "type": "inject",
+        "z": "e3edd6748fb7dc22",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 100,
+        "wires": [
+            [
+                "d2bf01c0252f47eb"
+            ]
+        ]
+    },
+    {
+        "id": "f51cecfcb8c71220",
+        "type": "subflow:d5412cf213c3058b",
+        "z": "e3edd6748fb7dc22",
+        "name": "",
+        "env": [],
+        "x": 350,
+        "y": 160,
+        "wires": [
+            [
+                "fcf65f134901b33c",
+                "5c9153fda05a47f9"
+            ]
+        ]
+    },
+    {
+        "id": "d2bf01c0252f47eb",
+        "type": "subflow:75e384e6e6384e79",
+        "z": "e3edd6748fb7dc22",
+        "name": "",
+        "env": [],
+        "x": 350,
+        "y": 100,
+        "wires": [
+            [
+                "5c9153fda05a47f9",
+                "f51cecfcb8c71220"
+            ]
+        ]
+    },
+    {
+        "id": "fcf65f134901b33c",
+        "type": "subflow:a04c16fc3eca7a05",
+        "z": "e3edd6748fb7dc22",
+        "name": "",
+        "env": [],
+        "x": 360,
+        "y": 220,
+        "wires": [
+            [
+                "5c9153fda05a47f9",
+                "0973cc88fad3502a"
+            ]
+        ]
+    },
+    {
+        "id": "0973cc88fad3502a",
+        "type": "subflow:4014f410b0d7b49b",
+        "z": "e3edd6748fb7dc22",
+        "name": "",
+        "env": [],
+        "x": 360,
+        "y": 280,
+        "wires": [
+            [
+                "5c9153fda05a47f9",
+                "d2bf01c0252f47eb"
+            ]
+        ]
     }
 ]
