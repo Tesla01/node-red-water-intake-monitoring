@@ -1,1 +1,288 @@
-[]
+[
+    {
+        "id": "e3edd6748fb7dc22",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "6107a3cb1efd575f",
+        "type": "modbus-client",
+        "name": "M-System R3",
+        "clienttype": "tcp",
+        "bufferCommands": true,
+        "stateLogEnabled": false,
+        "queueLogEnabled": false,
+        "tcpHost": "192.168.0.1",
+        "tcpPort": "502",
+        "tcpType": "DEFAULT",
+        "serialPort": "/dev/ttyUSB",
+        "serialType": "RTU-BUFFERD",
+        "serialBaudrate": "9600",
+        "serialDatabits": "8",
+        "serialStopbits": "1",
+        "serialParity": "none",
+        "serialConnectionDelay": "100",
+        "serialAsciiResponseStartDelimiter": "0x3A",
+        "unit_id": "1",
+        "commandDelay": "1",
+        "clientTimeout": "1000",
+        "reconnectOnTimeout": true,
+        "reconnectTimeout": "2000",
+        "parallelUnitIdsAllowed": true
+    },
+    {
+        "id": "0871493933a1207e",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "849894cb8d185fd5",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "c1166d05e90e7cdd",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "0871493933a1207e",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "9c5b7a629d727c44",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "database",
+        "name": "Water Intake Ciasdane",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://localhost:8086",
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "9bea39a4cc5b17d3",
+        "type": "modbus-read",
+        "z": "e3edd6748fb7dc22",
+        "name": "M-System",
+        "topic": "",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": false,
+        "unitid": "1",
+        "dataType": "InputRegister",
+        "adr": "16",
+        "quantity": "7",
+        "rate": "500",
+        "rateUnit": "ms",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "6107a3cb1efd575f",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 160,
+        "y": 220,
+        "wires": [
+            [],
+            [
+                "b4267483ad5449c5"
+            ]
+        ]
+    },
+    {
+        "id": "178bf530c4b5efdd",
+        "type": "debug",
+        "z": "e3edd6748fb7dc22",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "b4267483ad5449c5",
+        "type": "function",
+        "z": "e3edd6748fb7dc22",
+        "name": "",
+        "func": "const scaleValue = (/** @type {number} */ value, /** @type {number[]} */ from, /** @type {number[]} */ to) => {\n    var scale = (to[1] - to[0]) / (from[1] - from[0]);\n    var capped = Math.min(from[1], Math.max(from[0], value)) - from[0];\n    return (capped * scale + to[0]).toFixed(2);\n}\n\nconst realInt = (/** @type {number} */ buf1, /** @type {number} */ buf2) => {\n    return Buffer.from([buf1, buf2]).readInt16BE(0) / 100\n}\n\nvar buffer = msg.payload.buffer;\nvar em1_ampere = scaleValue(realInt(buffer[0], buffer[1]), [4.0, 20.0], [0.0, 1670.0]);\nvar em2_ampere = scaleValue(realInt(buffer[2], buffer[3]), [4.0, 20.0], [0.0, 1350.0]);\nvar em3_ampere = 0; //4,5\nvar em4_ampere = 0; //6,7\nvar pln_ampere = scaleValue(realInt(buffer[8], buffer[9]), [4.0, 20.0], [0.0, 1350.0]);\nvar pln_voltage = scaleValue(realInt(buffer[10], buffer[11]), [4.0, 20.0], [0.0, 20.0]);\nvar pressure = scaleValue(realInt(buffer[12], buffer[13]), [4.0, 20.0], [0.0, 25.0]);\n\nmsg.payload = {\n    \"em1_ampere\": Number(em1_ampere),\n    \"em2_ampere\": Number(em2_ampere),\n    \"em3_ampere\": Number(em3_ampere),\n    \"em4_ampere\": Number(em4_ampere),\n    \"pressure\": Number(pressure)\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 220,
+        "wires": [
+            [
+                "178bf530c4b5efdd",
+                "3b9b3975b20ba4c4",
+                "302a5f478c873f5e",
+                "1d8d9f5fb4f3cfba"
+            ]
+        ]
+    },
+    {
+        "id": "3b9b3975b20ba4c4",
+        "type": "ui_text",
+        "z": "e3edd6748fb7dc22",
+        "group": "c1166d05e90e7cdd",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Pompa Supply 1",
+        "format": "{{msg.payload.em1_ampere}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 630,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "302a5f478c873f5e",
+        "type": "ui_text",
+        "z": "e3edd6748fb7dc22",
+        "group": "c1166d05e90e7cdd",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Pompa Supply 2",
+        "format": "{{msg.payload.em2_ampere}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 620,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "1d8d9f5fb4f3cfba",
+        "type": "influxdb out",
+        "z": "e3edd6748fb7dc22",
+        "influxdb": "9c5b7a629d727c44",
+        "name": "InfluxDB Water Intake",
+        "measurement": "water-intake",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "jmu-water-intake-cisadane",
+        "bucket": "water-intake-bucket",
+        "x": 660,
+        "y": 160,
+        "wires": []
+    }
+]
